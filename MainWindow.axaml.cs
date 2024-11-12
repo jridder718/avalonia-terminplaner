@@ -18,10 +18,20 @@ public partial class MainWindow : Window {
         AddAppointment("Arbeitszeitbetrug", "Nicht arbeiten", DateTime.Now, TimeSpan.FromDays(1));
     }
 
-    private void Add_Appointment_Button_Click(object? sender, RoutedEventArgs e)
+    private async void Add_Appointment_Button_Click(object? sender, RoutedEventArgs e)
     {
-        AddAppointment("Titel", "Beschreibung", DateTime.Now, TimeSpan.FromDays(1));
+        var dialog = new AppointmentDialog();
+
+        // Dialog anzeigen und warten, bis er geschlossen wird
+        await dialog.ShowDialog(this);
+
+        // Wenn ein Termin erstellt wurde, füge ihn der Liste hinzu
+        if (dialog.NewAppointment != null)
+        {
+            AddAppointment(dialog.NewAppointment.Title, dialog.NewAppointment.Description, dialog.NewAppointment.Date, dialog.NewAppointment.Time);
+        }
     }
+
 
     private void AddAppointment(string title, string description, DateTime date, TimeSpan time)
     {
