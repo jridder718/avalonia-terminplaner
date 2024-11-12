@@ -7,7 +7,8 @@
         x:Class="avalonia_terminplaner.MainWindow"
         Title="avalonia_terminplaner" Height="800" Width="1440"
         x:DataType="viewModels:MainWindowViewModel"
-		Background="#E7F1F3" CanResize="False">
+        Background="#E7F1F3" CanResize="False">
+
 	<Border Margin="20" Background="#fff" CornerRadius="20" BoxShadow="0 0 14 0 #26000000">
 		<StackPanel Margin="20">
 			<Grid>
@@ -15,6 +16,7 @@
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
+
 				<TextBlock Grid.Column="0" FontSize="36" Foreground="#303030" FontWeight="Bold" VerticalAlignment="Center" Text="Termine" />
 				<Button Click="Add_Appointment_Button_Click" BorderThickness="4" Grid.Column="1" VerticalAlignment="Center" Margin="20,0,0,0" Content="Termin hinzufügen">
 					<Button.Styles>
@@ -32,44 +34,49 @@
 				</Button>
 			</Grid>
 
-			<ListBox Margin="0 20 0 0" ItemsSource="{Binding Appointments}" Background="Transparent" BorderBrush="Transparent">
-				<ListBox.Styles>
-					<Style Selector="ListBoxItem">
-						<Setter Property="Background" Value="#C3DADF"/>
-						<Setter Property="CornerRadius" Value="10"/>
-						<Setter Property="Margin" Value="0,0,0,10"/>
-						<Setter Property="Padding" Value="15"/>
-					</Style>
-					<Style Selector="ListBoxItem:selected /template/ ContentPresenter">
-						<Setter Property="Background" Value="#C3DADF"/>
-					</Style>
-					<Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
-						<Setter Property="Background" Value="#C3DADF"/>
-					</Style>
-				</ListBox.Styles>
+			<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+				<ListBox Margin="0 20 0 0" ItemsSource="{Binding Appointments}" Background="Transparent" BorderBrush="Transparent" MaxHeight="650">
+					<ListBox.Styles>
+						<Style Selector="ListBoxItem">
+							<Setter Property="Background" Value="#C3DADF"/>
+							<Setter Property="CornerRadius" Value="10"/>
+							<Setter Property="Margin" Value="0,0,0,10"/>
+							<Setter Property="Padding" Value="15"/>
+						</Style>
+						<Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+							<Setter Property="Background" Value="#C3DADF"/>
+						</Style>
+						<Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+							<Setter Property="Background" Value="#C3DADF"/>
+						</Style>
+					</ListBox.Styles>
 
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="Auto"/>
-							</Grid.ColumnDefinitions>
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+								</Grid.ColumnDefinitions>
 
-							<StackPanel Grid.Column="0" Orientation="Horizontal">
-								<TextBlock FontSize="18" Foreground="#3F484A" Text="{Binding Date}" Margin="0,0,10,0"/>
-								<TextBlock FontSize="18" Foreground="#3F484A" Text="{Binding Time}" Margin="0,0,10,0"/>
-								<TextBlock FontSize="18" Foreground="#3F484A" Text="{Binding Description}" />
-							</StackPanel>
+								<StackPanel Grid.Column="0">
+									<TextBlock Foreground="#3F484A" Text="{Binding Title}"/>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock FontSize="18" Foreground="#3F484A" Text="{Binding Date}" Margin="0,0,10,0"/>
+										<TextBlock FontSize="18" Foreground="#3F484A" Text="{Binding Time}" Margin="0,0,10,0"/>
+										<TextBlock FontSize="18" Foreground="#3F484A" Text="{Binding Description}" />
+									</StackPanel>
+								</StackPanel>
 
-							<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-								<Button Background="#FFF" Foreground="#3F484A" Content="Edit" Margin="0,0,5,0" CornerRadius="5"/>
-								<Button Click="Delete_Appointment_Button_Click" Background="#FFF" Foreground="#3F484A" Content="Delete" CornerRadius="5"/>
-							</StackPanel>
-						</Grid>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
+								<StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+									<Button Background="#FFF" Foreground="#3F484A" Content="Edit" Margin="0,0,5,0" CornerRadius="5"/>
+									<Button Click="Delete_Appointment_Button_Click" Background="#FFF" Foreground="#3F484A" Content="Delete" CornerRadius="5"/>
+								</StackPanel>
+							</Grid>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</ScrollViewer>
 		</StackPanel>
 	</Border>
 </Window>

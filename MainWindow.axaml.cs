@@ -37,9 +37,8 @@ public partial class MainWindow : Window {
     private void Delete_Appointment_Button_Click(object? sender, RoutedEventArgs e)
     {
         var button = sender as Button;
-        var appointment = button?.DataContext as Appointment;
 
-        if (appointment != null)
+        if (button?.DataContext is Appointment appointment)
         {
             _viewModel.Appointments.Remove(appointment);
         }
