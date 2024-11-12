@@ -1,7 +1,5 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using avalonia_terminplaner.Models;
 using System;
 
@@ -18,22 +16,14 @@ public partial class AppointmentDialog : Window
 
     private void OnSaveButtonClick(object sender, RoutedEventArgs e)
     {
-        // Hier die Eingabewerte lesen
-        var title = TitleTextBox.Text;
-        var description = DescriptionTextBox.Text;
-        var date = DatePicker.SelectedDate?.DateTime ?? DateTime.Now;
-        var duration = TimeSpan.FromHours(double.TryParse(DurationTextBox.Text, out double hours) ? hours : 1);
-
-        // Ein neues Appointment erstellen
-        NewAppointment = new Appointment
+        NewAppointment = new()
         {
-            Title = title,
-            Description = description,
-            Date = date,
-            Time = duration
+            Title = TitleTextBox.Text,
+            Description = DescriptionTextBox.Text,
+            Date = DatePicker.SelectedDate?.DateTime ?? DateTime.Now,
+            Time = TimeSpan.FromHours(double.TryParse(DurationTextBox.Text, out double hours) ? hours : 1)
         };
 
-        // Fenster schlieﬂen
         Close();
     }
 

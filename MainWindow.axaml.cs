@@ -22,10 +22,8 @@ public partial class MainWindow : Window {
     {
         var dialog = new AppointmentDialog();
 
-        // Dialog anzeigen und warten, bis er geschlossen wird
         await dialog.ShowDialog(this);
 
-        // Wenn ein Termin erstellt wurde, füge ihn der Liste hinzu
         if (dialog.NewAppointment != null)
         {
             AddAppointment(dialog.NewAppointment.Title, dialog.NewAppointment.Description, dialog.NewAppointment.Date, dialog.NewAppointment.Time);
